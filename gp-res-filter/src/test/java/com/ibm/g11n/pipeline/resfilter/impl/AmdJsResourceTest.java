@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -134,7 +135,7 @@ public class AmdJsResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".js");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".js").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -148,7 +149,7 @@ public class AmdJsResourceTest {
     public void testMerge() throws IOException, ResourceFilterException {
         File tempFile;
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".js");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".js").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);
@@ -158,7 +159,7 @@ public class AmdJsResourceTest {
             assertTrue(ResourceTestUtil.compareFiles(EXPECTED_MERGE_1_FILE, tempFile));
         }
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".js");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".js").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);
@@ -168,7 +169,7 @@ public class AmdJsResourceTest {
             assertTrue(ResourceTestUtil.compareFiles(EXPECTED_MERGE_2_FILE, tempFile));
         }
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".js");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".js").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);

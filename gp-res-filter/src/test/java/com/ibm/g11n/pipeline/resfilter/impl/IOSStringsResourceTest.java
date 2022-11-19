@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -149,7 +150,7 @@ public class IOSStringsResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".strings");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".strings").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -163,7 +164,7 @@ public class IOSStringsResourceTest {
     public void testMerge() throws IOException, ResourceFilterException {
         File tempFile;
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".strings");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".strings").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);
@@ -173,7 +174,7 @@ public class IOSStringsResourceTest {
             assertTrue(ResourceTestUtil.compareFiles(EXPECTED_MERGE_1_FILE, tempFile));
         }
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".strings");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".strings").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);

@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -139,7 +140,7 @@ public class TestCustomFilter {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".mock");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".mock").toFile();
         tempFile.deleteOnExit();
 
         ResourceFilter filter = ResourceFilterFactory.getResourceFilter("MOCK");

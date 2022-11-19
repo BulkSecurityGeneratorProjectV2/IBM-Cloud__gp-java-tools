@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -151,7 +152,7 @@ public class AndroidStringsResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException{
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".xml");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".xml").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -165,7 +166,7 @@ public class AndroidStringsResourceTest {
     public void testMerge() throws IOException, ResourceFilterException {
         File tempFile;
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".xml");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".xml").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);
@@ -175,7 +176,7 @@ public class AndroidStringsResourceTest {
             assertTrue(ResourceTestUtil.compareFiles(EXPECTED_MERGE_1_FILE, tempFile));
         }
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".xml");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".xml").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);

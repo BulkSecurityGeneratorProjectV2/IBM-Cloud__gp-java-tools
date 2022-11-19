@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -219,7 +220,7 @@ public class JavaPropertiesResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".properties");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".properties").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -234,7 +235,7 @@ public class JavaPropertiesResourceTest {
 
     @Test
     public void testMerge() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".properties");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".properties").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile); InputStream is = new FileInputStream(INPUT_FILE)) {
@@ -418,7 +419,7 @@ public class JavaPropertiesResourceTest {
 
     @Test
     public void testWriteAllQuotes() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".properties");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".properties").toFile();
         JavaPropertiesResource res = new JavaPropertiesResource(Encoding.ISO_8859_1, MessagePatternEscape.ALL);
         tempFile.deleteOnExit();
         try (OutputStream os = new FileOutputStream(tempFile)) {

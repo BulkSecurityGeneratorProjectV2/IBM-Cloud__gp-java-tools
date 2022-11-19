@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -174,7 +175,7 @@ public class JavaUTF8PropertiesResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".properties");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".properties").toFile();
         tempFile.deleteOnExit();
         //System.out.println(tempFile.getAbsolutePath());
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -190,7 +191,7 @@ public class JavaUTF8PropertiesResourceTest {
 
     @Test
     public void testMerge() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".properties");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".properties").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile); InputStream is = new FileInputStream(INPUT_FILE)) {

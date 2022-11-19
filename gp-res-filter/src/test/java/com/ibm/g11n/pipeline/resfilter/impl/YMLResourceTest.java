@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -87,7 +88,7 @@ public class YMLResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".yml");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".yml").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -100,7 +101,7 @@ public class YMLResourceTest {
 
     @Test
     public void testMerge() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".yml");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".yml").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile); InputStream is = new FileInputStream(INPUT_FILE)) {

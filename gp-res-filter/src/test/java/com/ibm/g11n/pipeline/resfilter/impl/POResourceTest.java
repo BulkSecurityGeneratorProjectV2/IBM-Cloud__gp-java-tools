@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -173,7 +174,7 @@ public class POResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".pot");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".pot").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -189,7 +190,7 @@ public class POResourceTest {
     public void testMerge() throws IOException, ResourceFilterException {
         File tempFile;
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".po");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".po").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);
@@ -199,7 +200,7 @@ public class POResourceTest {
             assertTrue(ResourceTestUtil.compareFiles(EXPECTED_MERGE_1_FILE, tempFile));
         }
 
-        tempFile = File.createTempFile(this.getClass().getSimpleName(), ".po");
+        tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".po").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile);

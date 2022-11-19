@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -172,7 +173,7 @@ public class JsonResourceTest {
 
     @Test
     public void testWrite() throws IOException, ResourceFilterException {
-        File tempFile = File.createTempFile(this.getClass().getSimpleName(), ".json");
+        File tempFile = Files.createTempFile(this.getClass().getSimpleName(), ".json").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStream os = new FileOutputStream(tempFile)) {
@@ -196,7 +197,7 @@ public class JsonResourceTest {
                     resStrList.toArray());
 
             // Now write
-            File tempFile = File.createTempFile(this.getClass().getSimpleName(), "2.json");
+            File tempFile = Files.createTempFile(this.getClass().getSimpleName(), "2.json").toFile();
             // File tempFile = new File("/tmp/2.json");
             tempFile.deleteOnExit();
 
@@ -220,7 +221,7 @@ public class JsonResourceTest {
             Collections.sort(resStrList, new ResourceStringComparator());
 
             // Now write
-            File tempFile = File.createTempFile(this.getClass().getSimpleName(), "3.json");
+            File tempFile = Files.createTempFile(this.getClass().getSimpleName(), "3.json").toFile();
             tempFile.deleteOnExit();
 
             try (OutputStream os = new FileOutputStream(tempFile)) {
